@@ -1,13 +1,31 @@
-# Kitchen Sink: Microfrontends with Astro
+# A Brief History of Modern AI
 
-```sh
-npm create astro@latest -- --template framework-multiple
-```
+This project is a personal blog built with Astro.js. It provides a historical overview of major advancements in AI and machine learning from 2010 to 2024.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/framework-multiple)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/framework-multiple)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/framework-multiple/devcontainer.json)
+## 🚀 Getting Started
 
-This example showcases Astro's built-in support for multiple frameworks ([React](https://react.dev), [Preact](https://preactjs.com), [Svelte](https://svelte.dev), and [Vue (`v3.x`)](https://v3.vuejs.org/)).
+1.  **Install dependencies:**
 
-No configuration is needed to enable these frameworks—just start writing components in `src/components`.
+    ```bash
+    npm install
+    ```
+
+2.  **Start the development server:**
+
+    ```bash
+    npm run dev
+    ```
+
+3.  **Open your browser** and visit [http://localhost:4321](http://localhost:4321)
+
+## project-structure
+
+*   `src/content/blog/`: Contains the Markdown files for blog posts.
+*   `src/pages/`: Contains the Astro pages for the site.
+*   `src/layouts/`: Contains the main layout for the site.
+*   `src/components/`: Contains reusable Astro components.
+
+## 🛠️ Technologies Used
+
+*   [Astro](https://astro.build/)
+*   [Tailwind CSS](https://tailwindcss.com/)
