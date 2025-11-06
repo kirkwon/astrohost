@@ -15,9 +15,11 @@ const { Content } = await post.render();
 ---
 
 <Layout title={post.data.title}>
-  <article class="prose dark:prose-invert lg:prose-xl mx-auto">
-    <h1 class="text-4xl font-bold mb-4 dark:text-white">{post.data.title}</h1>
-		<p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Published on: {post.data.pubDate.toDateString()}</p>
+  <article class="prose prose-lg dark:prose-invert lg:prose-2xl mx-auto max-w-4xl">
+    <h1 transition:name={`post-title-${post.slug}`} class="text-5xl font-black mb-6 bg-gradient-to-r from-primary-700 to-slate-700 dark:from-primary-400 dark:to-slate-400 bg-clip-text text-transparent">{post.data.title}</h1>
+		<div class="not-prose mb-8 p-4 bg-primary-50 dark:bg-slate-800 rounded-lg border-l-4 border-primary-600">
+			<p class="text-lg font-semibold text-primary-900 dark:text-primary-200">Published on: {post.data.pubDate.toDateString()}</p>
+		</div>
     <Content />
   </article>
 </Layout>

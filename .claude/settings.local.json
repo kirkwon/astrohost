@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree src -I node_modules)",
+      "Bash(npm run build)",
+      "Bash(npm install)",
+      "Bash(npm run dev)",
+      "Bash(curl -s http://localhost:4321/)",
+      "Bash(git add .)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
