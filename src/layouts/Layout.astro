@@ -19,13 +19,59 @@ const { title } = Astro.props;
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"> 
-  <script>
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  
+  <script is:inline>
+    // This is the FOUC prevention script. It runs instantly.
+    // It defaults to dark mode unless 'light' is explicitly set in localStorage.
+    const theme = (() => {
+      if (typeof localStorage !== 'undefined' && localStorage.getItem('color-theme') === 'light') {
+        return 'light';
+      }
+      return 'dark';
+    })();
+    if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove('dark');
     }
+
+    // This is the single source of truth for all theme logic.
+    function themeSetup() {
+      // 1. RE-APPLY THE THEME CLASS. This defaults to dark unless 'light' is set.
+      const currentTheme = localStorage.getItem('color-theme') === 'light' ? 'light' : 'dark';
+      if (currentTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      // 2. SETUP THE INTERACTIVE TOGGLE BUTTON
+      const toggleBtn = document.getElementById('theme-toggle');
+      const darkIcon = document.getElementById('theme-toggle-dark-icon');
+      const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+      if (!toggleBtn || !darkIcon || !lightIcon) return;
+
+      // 3. Sync the icon to the current theme
+      if (document.documentElement.classList.contains('dark')) {
+        darkIcon.classList.remove('hidden');
+        lightIcon.classList.add('hidden');
+      } else {
+        darkIcon.classList.add('hidden');
+        lightIcon.classList.remove('hidden');
+      }
+
+      // 4. Assign the click handler
+      toggleBtn.onclick = function() {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('color-theme', isDark ? 'dark' : 'light');
+      };
+    }
+
+    // Run on initial page load after the DOM is ready
+    document.addEventListener('DOMContentLoaded', themeSetup);
+    // Run after every Astro View Transitions navigation
+    document.addEventListener('astro:after-swap', themeSetup);
   </script>
 </head>
 <body class="font-sans">
