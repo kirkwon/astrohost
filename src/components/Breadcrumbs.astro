@@ -1,0 +1,20 @@
+---
+interface Props {
+    crumbs: { name: string; path: string; }[];
+}
+
+const { crumbs } = Astro.props;
+---
+
+<nav aria-label="breadcrumb">
+    <ol class="flex items-center space-x-2 text-sm text-muted-foreground">
+        {crumbs.map((crumb, index) => (
+            <li class="flex items-center space-x-2">
+                <a href={crumb.path} class="hover:text-primary">{crumb.name}</a>
+                {index < crumbs.length - 1 && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                )}
+            </li>
+        ))}
+    </ol>
+</nav>
