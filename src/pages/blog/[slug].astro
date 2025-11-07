@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -14,7 +14,7 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<Layout title={post.data.title}>
+<BaseLayout title={post.data.title}>
   <article class="prose dark:prose-invert mx-auto py-8">
     <h1 transition:name={`post-title-${post.slug}`} class="text-5xl font-black mb-6 bg-gradient-to-r from-primary-700 to-slate-700 dark:from-primary-400 dark:to-slate-400 bg-clip-text text-transparent">{post.data.title}</h1>
     <div class="not-prose mb-8 p-4 bg-secondary rounded-lg border-l-4 border-primary">
@@ -22,4 +22,4 @@ const { Content } = await post.render();
     </div>
     <Content />
   </article>
-</Layout>
+</BaseLayout>

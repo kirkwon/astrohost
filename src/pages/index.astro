@@ -1,6 +1,6 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 
 const posts = (await getCollection('blog')).sort(
@@ -8,7 +8,7 @@ const posts = (await getCollection('blog')).sort(
 );
 ---
 
-<Layout title="My Astro Blog">
+<BaseLayout title="My Astro Blog">
 	<section class="py-20">
 		<div class="container text-center">
 			<h1 class="font-heading text-6xl md:text-7xl lg:text-8xl font-black mb-6">
@@ -26,6 +26,7 @@ const posts = (await getCollection('blog')).sort(
 					</a>
 				))}
 			</div>
+			<a href="/about" class="text-blue-500 hover:underline">About Page</a>
 		</div>
 	</section>
 
@@ -38,4 +39,4 @@ const posts = (await getCollection('blog')).sort(
 			</div>
 		</div>
 	</section>
-</Layout>
+</BaseLayout>
