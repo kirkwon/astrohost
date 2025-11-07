@@ -20,7 +20,7 @@ This project is a modern, content-focused website built with Astro.js. It featur
     *   **Logo:** The site logo.
     *   **ThemeToggle:** A button to switch between light and dark mode.
 
-## Current Plan: App Modernization
+## Current Plan: App Modernization & Polish
 
 ### Completed Steps:
 
@@ -30,4 +30,8 @@ This project is a modern, content-focused website built with Astro.js. It featur
 *   **DONE:** Update the layout and styling of the blog post pages to a more modern design.
 *   **DONE:** Fix the logo link to navigate back to the home page.
 *   **DONE:** Correct the rendering of markdown content on the blog post pages.
+*   **DONE:** Added subtle fade-in animations on scroll for the blog post cards.
 
+### Current Task: Staggered Animation
+
+*   **IN PROGRESS:** Implement a staggered "domino effect" animation for the blog post cards, so they animate in one after another.

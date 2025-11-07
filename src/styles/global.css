@@ -60,6 +60,16 @@
 }
 
 @layer components {
+  .glow-on-hover {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  .glow-on-hover:hover {
+    box-shadow: 0 0 15px 5px hsla(var(--primary), 0.5);
+  }
+  .dark .glow-on-hover:hover {
+    box-shadow: 0 0 15px 5px hsla(var(--primary), 0.7);
+  }
+
   /* Prose plugin color overrides to use CSS variables */
   .prose {
     color: hsl(var(--foreground));
