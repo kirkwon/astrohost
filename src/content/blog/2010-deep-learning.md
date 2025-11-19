@@ -1,10 +1,11 @@
 ---
 title: '2010: The Rise of Deep Learning'
-description: 'A look back at the resurgence of neural networks and the beginning of the deep learning era.'
 pubDate: 2010-07-16
+description: >-
+  A look back at the resurgence of neural networks and the beginning of the deep
+  learning era.
 ---
-
-## The Long Winter
+## The Long Winter ❄️
 
 By 2010, **neural networks** had been written off as a dead end. For nearly two decades, the AI community had suffered through what researchers called the **"AI Winter"**—a period of funding cuts, failed promises, and general skepticism about machine learning. The few scientists still working on neural networks were considered eccentric at best, crackpots at worst. At University of Toronto, **Geoffrey Hinton** kept plugging away, convinced that stacking layers of neurons was the key to intelligence. At NYU, **Yann LeCun** had essentially been relegated to the academic wilderness, his convolutional neural networks dismissed as impractical. In Montreal, **Yoshua Bengio** worked in near-isolation, developing ideas that the broader AI community barely acknowledged. These three—later dubbed the "godfathers of deep learning"—continued their research through the lean years, armed with nothing but stubborn conviction and a handful of graduate students who believed in their vision.
 
@@ -23,4 +24,3 @@ What changed wasn't just the results—it was **who** was getting those results.
 ## The Dawn of the Modern Era
 
 Looking back, 2010 wasn't just the year deep learning got good—it was the year it got **respectable**. The shift was cultural as much as technical. Neural networks went from "that weird thing Hinton keeps talking about" to "the hottest area in AI." Students who had been told to avoid neural networks (because they were "dead") suddenly switched fields. Funding agencies that had starved AI research for years suddenly found money flowing again. Most importantly, the three godfathers—who had spent decades in the wilderness—were finally proven right. As Hinton later said, "It took us forty years to go from being cranks to being at the center of the universe." 2010 was the year the center of the universe shifted, and nothing in AI would ever be the same.
-
