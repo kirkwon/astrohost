@@ -1,9 +1,14 @@
 import { config, fields, collection } from '@keystatic/core';
 
 export default config({
-    storage: {
-        kind: 'local',
-    },
+    storage: import.meta.env.PROD
+        ? {
+            kind: 'github',
+            repo: 'kirkwon/astrohost',
+        }
+        : {
+            kind: 'local',
+        },
     collections: {
         blog: collection({
             label: 'Blog',
