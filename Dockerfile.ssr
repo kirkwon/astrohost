@@ -15,6 +15,8 @@ RUN npm run build
 FROM node:20-slim AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=3000
 
 # Copy build output and node_modules from builder
 COPY --from=builder /app/dist ./dist
