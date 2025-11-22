@@ -10,8 +10,7 @@ export default defineConfig({
     keystatic()
   ],
   adapter: node({
-    mode: 'standalone',
-    host: '0.0.0.0'
+    mode: 'standalone'
   }),
   output: 'server'
 });
