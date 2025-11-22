@@ -4,7 +4,7 @@ export const prerender = true;
 import { getCollection } from "astro:content";
 import Card from "../components/Card.astro";
 
-import TitleImageCarousel from "../components/TitleImageCarousel";
+import HeroSection from "../components/HeroSection";
 
 const posts = (await getCollection("blog")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -14,13 +14,14 @@ const posts = (await getCollection("blog")).sort(
 <BaseLayout title="My Astro Blog">
 	<section class="py-20">
 		<div class="container text-center">
-			<TitleImageCarousel
+			<HeroSection
 				client:load
 				titleText="A Brief History of Modern AI"
 				subtitleText="A year-by-year account of the major advancements in AI and machine learning 🚀"
 				imageSrc="/images/BriefHistoryAI.png"
 				imageAlt="A Brief History of Modern AI Visualization"
 				imageTitle="Visual History"
+				displayMode="title-subtitle"
 			/>
 
 			<!-- Timeline Navigation -->
