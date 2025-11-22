@@ -6,6 +6,7 @@ interface TitleImageCarouselProps {
     subtitleText: string;
     imageSrc: string;
     imageAlt: string;
+    imageTitle?: string;
 }
 
 export default function TitleImageCarousel({
@@ -13,19 +14,28 @@ export default function TitleImageCarousel({
     subtitleText,
     imageSrc,
     imageAlt,
+    imageTitle,
 }: TitleImageCarouselProps) {
     const [isFlipped, setIsFlipped] = useState(false);
+    const [lastInteraction, setLastInteraction] = useState(Date.now());
 
     useEffect(() => {
         const interval = setInterval(() => {
+            // Only auto-flip if no interaction in the last 5 seconds (optional logic, but simple interval is fine too)
+            // Actually, let's just keep the simple interval but reset it on click by depending on lastInteraction
             setIsFlipped((prev) => !prev);
         }, 5000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [lastInteraction]); // Restart timer when lastInteraction changes
+
+    const handleFlip = () => {
+        setIsFlipped((prev) => !prev);
+        setLastInteraction(Date.now());
+    };
 
     return (
-        <div className="relative w-full h-[300px] md:h-[400px] perspective-1000 cursor-pointer" onClick={() => setIsFlipped(!isFlipped)}>
+        <div className="relative w-full h-[300px] md:h-[400px] perspective-1000 cursor-pointer" onClick={handleFlip}>
             <div
                 className={cn(
                     "relative w-full h-full transition-transform duration-1000 transform-style-3d",
@@ -45,12 +55,19 @@ export default function TitleImageCarousel({
                 </div>
 
                 {/* Back Face (Image) */}
-                <div className="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center overflow-hidden rounded-xl">
-                    <img
-                        src={imageSrc}
-                        alt={imageAlt}
-                        className="w-full h-full object-contain md:object-cover rounded-xl shadow-2xl"
-                    />
+                <div className="absolute w-full h-full backface-hidden rotate-y-180 flex flex-col items-center justify-center overflow-hidden rounded-xl bg-background/50 backdrop-blur-sm border border-border/50">
+                    {imageTitle && (
+                        <h3 className="text-xl md:text-2xl font-bold mb-4 text-primary">
+                            {imageTitle}
+                        </h3>
+                    )}
+                    <div className="relative w-full h-full max-h-[85%] overflow-hidden rounded-lg">
+                        <img
+                            src={imageSrc}
+                            alt={imageAlt}
+                            className="w-full h-full object-contain p-4"
+                        />
+                    </div>
                 </div>
             </div>
 
