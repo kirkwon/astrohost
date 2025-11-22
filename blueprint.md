@@ -27,11 +27,7 @@ This document outlines all the styles, designs, and features implemented in the 
     *   Dynamically generated pages for each Markdown blog post.
     *   Displays post content with a clean, readable layout.
 
-### 2.3. Implemented Changes
-*   **Hero Section Refactor:** The `TitleImageCarousel` component has been refactored and renamed to `HeroSection.tsx`. It no longer functions as a carousel.
-*   **Static Display in Homepage:** The `HeroSection` component in `src/pages/index.astro` now statically displays either the title/subtitle or an image, controlled by a `displayMode` prop. By default, it shows only the title and subtitle, adhering to the principle of showing only one type of content at a time.
-
-### 2.4. Design & UX Enhancements
+### 2.3. Design & UX Enhancements
 *   **Animations:**
     *   **Scroll-based Fade-in:** Blog post cards and "About Me" page content fade in as the user scrolls.
     *   **Staggered Animation:** Blog post cards animate in a staggered "domino" sequence.
