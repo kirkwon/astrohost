@@ -23,7 +23,7 @@ export default function TitleImageCarousel({
     };
 
     return (
-        <div className="relative w-full h-[300px] md:h-[400px] perspective-1000 cursor-pointer" onClick={handleFlip}>
+        <div className="relative w-full h-[300px] md:h-[400px] perspective-1000 transform-style-3d">
             <div
                 className={cn(
                     "relative w-full h-full transition-transform duration-1000 transform-style-3d",
@@ -58,6 +58,14 @@ export default function TitleImageCarousel({
                     </div>
                 </div>
             </div>
+
+            {/* Toggle Button */}
+            <button 
+                onClick={handleFlip} 
+                className="absolute top-4 right-4 bg-primary text-primary-foreground px-4 py-2 rounded-lg shadow-md hover:bg-primary/90 transition-all duration-200 z-20"
+            >
+                {isFlipped ? 'Show Title' : 'Show Image'}
+            </button>
 
             {/* Visual Indicator */}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
