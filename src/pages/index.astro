@@ -4,6 +4,8 @@ export const prerender = true;
 import { getCollection } from "astro:content";
 import Card from "../components/Card.astro";
 
+import TitleImageCarousel from "../components/TitleImageCarousel";
+
 const posts = (await getCollection("blog")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
@@ -12,17 +14,23 @@ const posts = (await getCollection("blog")).sort(
 <BaseLayout title="My Astro Blog">
 	<section class="py-20">
 		<div class="container text-center">
-			<h1
-				class="scroll-animate font-heading text-6xl md:text-7xl lg:text-8xl font-black mb-6"
-			>
-				A Brief History of Modern AI <span class="robot-emoji">🤖</span>
-			</h1>
-			<p
-				class="scroll-animate text-2xl text-muted-foreground font-medium mb-10"
-			>
-				A year-by-year account of the major advancements in AI and
-				machine learning 🚀
-			</p>
+			<TitleImageCarousel
+				client:load
+				title={(
+					<h1 class="scroll-animate font-heading text-6xl md:text-7xl lg:text-8xl font-black mb-6">
+						A Brief History of Modern AI{" "}
+						<span class="robot-emoji">🤖</span>
+					</h1>
+				)}
+				subtitle={(
+					<p class="scroll-animate text-2xl text-muted-foreground font-medium mb-10">
+						A year-by-year account of the major advancements in AI
+						and machine learning 🚀
+					</p>
+				)}
+				imageSrc="/images/BriefHistoryAI.png"
+				imageAlt="A Brief History of Modern AI Visualization"
+			/>
 
 			<!-- Timeline Navigation -->
 			<div class="flex flex-wrap justify-center gap-3 mb-8">
