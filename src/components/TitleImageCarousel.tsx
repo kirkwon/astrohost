@@ -19,11 +19,12 @@ export default function TitleImageCarousel({
     const [isFlipped, setIsFlipped] = useState(false);
 
     const handleFlip = () => {
+        console.log('Flipping! Current state:', isFlipped);
         setIsFlipped((prev) => !prev);
     };
 
     return (
-        <div className="relative w-full h-[300px] md:h-[400px] perspective-1000 transform-style-3d">
+        <div className="relative w-full h-[300px] md:h-[400px] perspective transform-style-3d">
             <div
                 className={cn(
                     "relative w-full h-full transition-transform duration-1000 transform-style-3d",
