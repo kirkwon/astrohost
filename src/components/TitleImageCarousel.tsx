@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 interface TitleImageCarouselProps {
-    title: React.ReactNode;
-    subtitle: React.ReactNode;
+    titleText: string;
+    subtitleText: string;
     imageSrc: string;
     imageAlt: string;
 }
 
 export default function TitleImageCarousel({
-    title,
-    subtitle,
+    titleText,
+    subtitleText,
     imageSrc,
     imageAlt,
 }: TitleImageCarouselProps) {
@@ -34,9 +34,13 @@ export default function TitleImageCarousel({
             >
                 {/* Front Face (Text) */}
                 <div className="absolute w-full h-full backface-hidden flex flex-col items-center justify-center">
-                    <div className="text-center">
-                        {title}
-                        {subtitle}
+                    <div className="text-center px-4">
+                        <h1 className="scroll-animate font-heading text-6xl md:text-7xl lg:text-8xl font-black mb-6">
+                            {titleText} <span className="robot-emoji">🤖</span>
+                        </h1>
+                        <p className="scroll-animate text-2xl text-muted-foreground font-medium mb-10">
+                            {subtitleText}
+                        </p>
                     </div>
                 </div>
 

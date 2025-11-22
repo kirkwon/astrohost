@@ -16,18 +16,8 @@ const posts = (await getCollection("blog")).sort(
 		<div class="container text-center">
 			<TitleImageCarousel
 				client:load
-				title={(
-					<h1 class="scroll-animate font-heading text-6xl md:text-7xl lg:text-8xl font-black mb-6">
-						A Brief History of Modern AI{" "}
-						<span class="robot-emoji">🤖</span>
-					</h1>
-				)}
-				subtitle={(
-					<p class="scroll-animate text-2xl text-muted-foreground font-medium mb-10">
-						A year-by-year account of the major advancements in AI
-						and machine learning 🚀
-					</p>
-				)}
+				titleText="A Brief History of Modern AI"
+				subtitleText="A year-by-year account of the major advancements in AI and machine learning 🚀"
 				imageSrc="/images/BriefHistoryAI.png"
 				imageAlt="A Brief History of Modern AI Visualization"
 			/>
