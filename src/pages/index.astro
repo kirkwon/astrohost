@@ -29,7 +29,7 @@ const posts = (await getCollection("blog")).sort(
 					posts.map((post) => (
 						<a
 							href={`/blog/${post.slug}`}
-							class="glow-on-hover px-4 py-2 bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground font-bold rounded-lg transition-all duration-200 text-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-110"
+							class="glow-on-hover px-4 py-2 bg-secondary text-secondary-foreground hover:bg-[#020617] hover:text-white dark:hover:bg-transparent dark:hover:text-emerald-500 dark:hover:border dark:hover:border-emerald-500 dark:hover:shadow-[0_0_10px_rgba(16,185,129,0.6)] border border-transparent font-bold rounded-lg transition-all duration-200 text-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-110"
 						>
 							{new Date(post.data.pubDate).getFullYear()}
 						</a>

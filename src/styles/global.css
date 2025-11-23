@@ -173,6 +173,14 @@
     color: transparent;
   }
 
+  .carousel-title .robot-emoji {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-text-fill-color: initial;
+    color: initial;
+  }
+
   .dark .carousel-title {
     /* Dark Mode: CRT Glow */
     background: none;
