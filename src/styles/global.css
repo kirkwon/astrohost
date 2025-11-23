@@ -197,8 +197,8 @@
   }
 
   .title-gradient {
-    background: linear-gradient(to right, #1e293b, #334155, #1e293b);
-    /* Slate-800 -> Slate-700 -> Slate-800 */
+    background: linear-gradient(135deg, #020617 0%, #334155 100%);
+    /* Dark Navy (Slate-950) -> Dark Slate (Slate-700) */
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
