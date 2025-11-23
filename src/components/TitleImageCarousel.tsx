@@ -25,7 +25,7 @@ export default function TitleImageCarousel({
 
     return (
         <div
-            className="relative w-full h-[300px] md:h-[400px] perspective transform-style-3d cursor-pointer group"
+            className="relative w-full h-[300px] dark:h-[380px] md:h-[400px] perspective transform-style-3d cursor-pointer group"
             onClick={handleFlip}
         >
             <div
