@@ -37,7 +37,7 @@ export default function TitleImageCarousel({
                 {/* Front Face (Text) */}
                 <div className="absolute w-full h-full backface-hidden flex flex-col items-center justify-center">
                     <div className="text-center px-4">
-                        <h1 className="scroll-animate font-heading text-6xl md:text-7xl lg:text-8xl font-black mb-6 title-gradient dark:bg-none dark:text-emerald-500 dark:crt-glow dark:font-mono">
+                        <h1 className="scroll-animate font-heading text-6xl md:text-7xl lg:text-8xl font-black mb-6 carousel-title">
                             {titleText} <span className="robot-emoji inline-block transition-transform duration-300 group-hover:scale-110">🤖</span>
                         </h1>
                         <p className="scroll-animate text-muted-foreground font-medium mb-10 subtitle-wide text-sm md:text-base">

@@ -165,7 +165,17 @@
   }
 
   /* Typography Effects */
-  .crt-glow {
+  .carousel-title {
+    /* Light Mode: Dark Navy Gradient */
+    background: linear-gradient(135deg, #020617 0%, #334155 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .dark .carousel-title {
+    /* Dark Mode: CRT Glow */
+    background: none;
     font-family: 'Space Mono', monospace;
     color: #10b981;
     /* Emerald-500 */
@@ -194,14 +204,6 @@
     55% {
       opacity: 0.95;
     }
-  }
-
-  .title-gradient {
-    background: linear-gradient(135deg, #020617 0%, #334155 100%);
-    /* Dark Navy (Slate-950) -> Dark Slate (Slate-700) */
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
 
   .subtitle-wide {
