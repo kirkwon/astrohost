@@ -1,129 +1,159 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import { ViewTransitions } from "astro:transitions";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"> 
-    
-    <ViewTransitions />
-    
-    <script is:inline>
-        let observer;
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
 
-        // Theme toggle script
-        const theme = (() => {
-            if (typeof localStorage !== 'undefined' && localStorage.getItem('color-theme')) {
-                return localStorage.getItem('color-theme');
-            }
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                return 'dark';
-            }
-            return 'light';
-        })();
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&family=Space+Mono:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
 
-        if (theme === 'light') {
-            document.documentElement.classList.remove('dark');
-        } else {
-            document.documentElement.classList.add('dark');
-        }
+        <ViewTransitions />
 
-        function setupThemeToggle() {
-            const toggleBtn = document.getElementById('theme-toggle');
-            const darkIcon = document.getElementById('theme-toggle-dark-icon');
-            const lightIcon = document.getElementById('theme-toggle-light-icon');
+        <script is:inline>
+            let observer;
 
-            if (!toggleBtn || !darkIcon || !lightIcon) {
-                return;
-            }
-
-            const updateIcons = () => {
-                const isDark = document.documentElement.classList.contains('dark');
-                if (isDark) {
-                    darkIcon.classList.remove('hidden');
-                    lightIcon.classList.add('hidden');
-                } else {
-                    darkIcon.classList.add('hidden');
-                    lightIcon.classList.remove('hidden');
+            // Theme toggle script
+            const theme = (() => {
+                if (
+                    typeof localStorage !== "undefined" &&
+                    localStorage.getItem("color-theme")
+                ) {
+                    return localStorage.getItem("color-theme");
                 }
-                toggleBtn.setAttribute('aria-checked', String(isDark));
+                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    return "dark";
+                }
+                return "light";
+            })();
+
+            if (theme === "light") {
+                document.documentElement.classList.remove("dark");
+            } else {
+                document.documentElement.classList.add("dark");
+            }
+
+            function setupThemeToggle() {
+                const toggleBtn = document.getElementById("theme-toggle");
+                const darkIcon = document.getElementById(
+                    "theme-toggle-dark-icon",
+                );
+                const lightIcon = document.getElementById(
+                    "theme-toggle-light-icon",
+                );
+
+                if (!toggleBtn || !darkIcon || !lightIcon) {
+                    return;
+                }
+
+                const updateIcons = () => {
+                    const isDark =
+                        document.documentElement.classList.contains("dark");
+                    if (isDark) {
+                        darkIcon.classList.remove("hidden");
+                        lightIcon.classList.add("hidden");
+                    } else {
+                        darkIcon.classList.add("hidden");
+                        lightIcon.classList.remove("hidden");
+                    }
+                    toggleBtn.setAttribute("aria-checked", String(isDark));
+                };
+
+                updateIcons();
+
+                toggleBtn.addEventListener("click", () => {
+                    const isDark =
+                        document.documentElement.classList.toggle("dark");
+                    localStorage.setItem(
+                        "color-theme",
+                        isDark ? "dark" : "light",
+                    );
+                    updateIcons();
+                });
+            }
+
+            // Scroll animation script
+            const setupScrollAnimations = () => {
+                // Disconnect any existing observer
+                if (observer) {
+                    observer.disconnect();
+                }
+
+                observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add("scrolled");
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    },
+                    { threshold: 0.1 },
+                );
+
+                document
+                    .querySelectorAll(".scroll-animate")
+                    .forEach((el, index) => {
+                        el.style.transitionDelay = `${index * 100}ms`;
+                        observer.observe(el);
+                    });
             };
 
-            updateIcons();
-
-            toggleBtn.addEventListener('click', () => {
-                const isDark = document.documentElement.classList.toggle('dark');
-                localStorage.setItem('color-theme', isDark ? 'dark' : 'light');
-                updateIcons();
+            document.addEventListener("DOMContentLoaded", () => {
+                setupThemeToggle();
+                setupScrollAnimations();
             });
-        }
 
-        // Scroll animation script
-        const setupScrollAnimations = () => {
-            // Disconnect any existing observer
-            if (observer) {
-                observer.disconnect();
-            }
-
-            observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('scrolled');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.scroll-animate').forEach((el, index) => {
-                el.style.transitionDelay = `${index * 100}ms`;
-                observer.observe(el);
+            document.addEventListener("astro:after-swap", () => {
+                setupThemeToggle();
+                setupScrollAnimations();
             });
-        };
-
-        document.addEventListener('DOMContentLoaded', () => {
-            setupThemeToggle();
-            setupScrollAnimations();
-        });
-        
-        document.addEventListener('astro:after-swap', () => {
-            setupThemeToggle();
-            setupScrollAnimations();
-        });
-
-    </script>
-</head>
-<body class="font-sans bg-background text-foreground" transition:animate="fade">
-    <Header />
-    <main class="container mx-auto px-4 py-6">
-        <slot />
-    </main>
-    <Footer />
-</body>
+        </script>
+    </head>
+    <body
+        class="font-sans bg-background text-foreground"
+        transition:animate="fade"
+    >
+        <Header />
+        <main class="container mx-auto px-4 py-6">
+            <slot />
+        </main>
+        <Footer />
+    </body>
 </html>
 <style is:global>
     /* View Transition animations */
     @keyframes fade-in {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 
     @keyframes fade-out {
-        from { opacity: 1; }
-        to { opacity: 0; }
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
     }
 
     ::view-transition-old(root) {
@@ -132,20 +162,22 @@ const { title } = Astro.props;
     ::view-transition-new(root) {
         animation: fade-in 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
     }
-    
+
     /* Fallback for browsers that don't support View Transitions */
     .page-leave {
         animation: fade-out 300ms ease-out forwards;
     }
     body {
-       animation: fade-in 400ms ease-in forwards;
+        animation: fade-in 400ms ease-in forwards;
     }
 
     /* Scroll-triggered animation styles */
     .scroll-animate {
         opacity: 0;
         transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        transition:
+            opacity 0.6s ease-out,
+            transform 0.6s ease-out;
     }
 
     .scroll-animate.scrolled {

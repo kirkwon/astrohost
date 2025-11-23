@@ -53,6 +53,7 @@
   * {
     border-color: hsl(var(--border));
   }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
@@ -63,9 +64,11 @@
   .glow-on-hover {
     transition: box-shadow 0.3s ease-in-out;
   }
+
   .glow-on-hover:hover {
     box-shadow: 0 0 15px 5px hsla(var(--primary), 0.5);
   }
+
   .dark .glow-on-hover:hover {
     box-shadow: 0 0 15px 5px hsla(var(--primary), 0.7);
   }
@@ -74,18 +77,28 @@
   .prose {
     color: hsl(var(--foreground));
   }
-  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
     color: hsl(var(--foreground));
   }
+
   .prose strong {
     color: hsl(var(--foreground));
   }
+
   .prose a {
     color: hsl(var(--primary));
   }
+
   .prose code {
     color: hsl(var(--foreground));
   }
+
   .prose blockquote {
     color: hsl(var(--muted-foreground));
     border-left-color: hsl(var(--border));
@@ -96,13 +109,17 @@
   .perspective {
     perspective: 1000px;
   }
+
   .transform-style-3d {
     transform-style: preserve-3d;
   }
+
   .backface-hidden {
     backface-visibility: hidden;
-    -webkit-backface-visibility: hidden; /* Safari */
+    -webkit-backface-visibility: hidden;
+    /* Safari */
   }
+
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
@@ -122,7 +139,9 @@
     perspective: 1000px;
   }
 
+
   @keyframes robot-shake {
+
     10%,
     90% {
       transform: translate3d(-1px, 0, 0) rotate(-5deg);
@@ -143,5 +162,50 @@
     60% {
       transform: translate3d(4px, 0, 0) rotate(5deg);
     }
+  }
+
+  /* Typography Effects */
+  .crt-glow {
+    font-family: 'Space Mono', monospace;
+    color: #10b981;
+    /* Emerald-500 */
+    text-shadow:
+      0 0 5px rgba(16, 185, 129, 0.8),
+      0 0 10px rgba(16, 185, 129, 0.6),
+      0 0 20px rgba(16, 185, 129, 0.4);
+    animation: flicker 5s infinite alternate;
+  }
+
+  @keyframes flicker {
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+      opacity: 1;
+    }
+
+    20%,
+    24%,
+    55% {
+      opacity: 0.95;
+    }
+  }
+
+  .title-gradient {
+    background: linear-gradient(to right, #1e293b, #334155, #1e293b);
+    /* Slate-800 -> Slate-700 -> Slate-800 */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .subtitle-wide {
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
   }
 }
