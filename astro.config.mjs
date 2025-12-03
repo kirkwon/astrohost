@@ -12,5 +12,12 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone'
   }),
-  output: 'server'
+  output: 'server',
+  vite: {
+    build: {
+      rollupOptions: {
+        external: ['@langchain/chains', '@langchain/core/documents', '@langchain/openai', '@langchain/core'],
+      },
+    },
+  },
 });

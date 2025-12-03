@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Chat from '../components/ai/Chat';
+---
+
+<BaseLayout title="AI Voice Agent">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-center mb-8">AI Voice Agent</h1>
+    <p class="text-lg text-center mb-8">Ask me anything about the history of AI!</p>
+    <Chat client:load />
+  </div>
+</BaseLayout>
