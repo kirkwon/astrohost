@@ -53,6 +53,7 @@
   * {
     border-color: hsl(var(--border));
   }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
@@ -63,9 +64,11 @@
   .glow-on-hover {
     transition: box-shadow 0.3s ease-in-out;
   }
+
   .glow-on-hover:hover {
     box-shadow: 0 0 15px 5px hsla(var(--primary), 0.5);
   }
+
   .dark .glow-on-hover:hover {
     box-shadow: 0 0 15px 5px hsla(var(--primary), 0.7);
   }
@@ -74,20 +77,145 @@
   .prose {
     color: hsl(var(--foreground));
   }
-  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
     color: hsl(var(--foreground));
   }
+
   .prose strong {
     color: hsl(var(--foreground));
   }
+
   .prose a {
     color: hsl(var(--primary));
   }
+
   .prose code {
     color: hsl(var(--foreground));
   }
+
   .prose blockquote {
     color: hsl(var(--muted-foreground));
     border-left-color: hsl(var(--border));
+  }
+}
+
+@layer components {
+  .perspective {
+    perspective: 1000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Safari */
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+
+@layer components {
+  .robot-emoji {
+    display: inline-block;
+    cursor: default;
+  }
+
+  .robot-emoji:hover {
+    animation: robot-shake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+
+  @keyframes robot-shake {
+
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0) rotate(-5deg);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0) rotate(5deg);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0) rotate(-5deg);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0) rotate(5deg);
+    }
+  }
+
+  /* Typography Effects */
+  .carousel-title {
+    /* Light Mode: Dark Navy Gradient */
+    background: linear-gradient(135deg, #020617 0%, #334155 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .carousel-title .robot-emoji {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-text-fill-color: initial;
+    color: initial;
+  }
+
+  .dark .carousel-title {
+    /* Dark Mode: CRT Glow */
+    background: none;
+    font-family: 'Space Mono', monospace;
+    color: #10b981;
+    /* Emerald-500 */
+    text-shadow:
+      0 0 5px rgba(16, 185, 129, 0.8),
+      0 0 10px rgba(16, 185, 129, 0.6),
+      0 0 20px rgba(16, 185, 129, 0.4);
+    animation: flicker 5s infinite alternate;
+  }
+
+  @keyframes flicker {
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+      opacity: 1;
+    }
+
+    20%,
+    24%,
+    55% {
+      opacity: 0.95;
+    }
+  }
+
+  .subtitle-wide {
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
   }
 }
