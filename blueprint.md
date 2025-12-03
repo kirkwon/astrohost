@@ -11,15 +11,17 @@ This project is a static-first web application built with Astro.js. It is design
 *   **File-based routing:** For pages and blog posts.
 *   **Blog:** A collection of markdown files detailing the history of AI from 2010 to 2024.
 *   **Responsive Design:** The website is designed to work on various screen sizes.
+*   **AI Voice Agent:** A new page (`/agent`) featuring an AI voice agent that can answer questions about the history of AI based on the content of the existing blog posts. The agent includes a chat interface, speech recognition for input, and text-to-speech for responses.
+
+## Resolved Issues
+
+*   **LangChain Dependency Conflicts:** Addressed multiple issues related to `langchain` module resolution and version conflicts during the build and runtime. This involved: 
+    *   Updating `@langchain` package versions in `package.json` to ensure compatibility.
+    *   Correcting import paths in `src/pages/api/chat.js` to align with `langchain`'s modular structure.
+    *   Performing several rounds of `npm install` (with `--force` and cleanups) to resolve dependency tree issues.
+    *   Adjusting `astro.config.mjs`'s `vite.build.rollupOptions.external` to correctly handle `langchain` modules during server-side bundling.
+*   **OpenAI API Key Not Found (Typo):** Corrected a typo in `src/pages/api/chat.js` where `openAIAIApiKey` was used instead of `openAIApiKey`, preventing the OpenAI API key from being read correctly from environment variables.
 
 ## Current Plan: AI Voice Agent
 
-I will add a new page to the website that features an AI voice agent. This agent will be able to answer user questions about the history of AI based on the content of the existing blog posts.
-
-### Steps:
-
-1.  **Create a new page:** I will create a new page at `/agent` for the AI voice agent.
-2.  **Design the UI:** The UI will include a chat interface for users to interact with the agent.
-3.  **Implement the AI agent:** The agent will use the content of the blog posts to answer questions.
-4.  **Add voice functionality:** The agent will be able to speak its responses using the browser's text-to-speech capabilities.
-5.  **Update navigation:** I will add a link to the new agent page in the website's header.
+All planned features for the AI voice agent have been implemented and tested locally. The agent should now be fully functional. No further steps are planned at this time.
