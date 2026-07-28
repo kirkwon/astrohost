@@ -3,7 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 export const prerender = true;
 import { getCollection } from "astro:content";
 import Card from "../components/Card.astro";
-
 import TitleImageCarousel from "../components/TitleImageCarousel";
 
 const posts = (await getCollection("blog")).sort(
@@ -12,8 +11,8 @@ const posts = (await getCollection("blog")).sort(
 ---
 
 <BaseLayout title="My Astro Blog">
-	<section class="py-20">
-		<div class="container text-center">
+	<section class="py-20 relative">
+		<div class="container text-center relative z-10">
 			<TitleImageCarousel
 				client:load
 				titleText="A Brief History of Modern AI"
@@ -22,28 +21,96 @@ const posts = (await getCollection("blog")).sort(
 				imageAlt="A Brief History of Modern AI Visualization"
 				imageTitle="Visual History"
 			/>
+		</div>
+	</section>
 
-			<!-- Timeline Navigation -->
-			<div class="flex flex-wrap justify-center gap-3 mb-8">
-				{
-					posts.map((post) => (
-						<a
-							href={`/blog/${post.slug}`}
-							class="glow-on-hover px-4 py-2 bg-secondary text-secondary-foreground hover:bg-[#020617] hover:text-white dark:hover:bg-transparent dark:hover:text-emerald-500 dark:hover:border dark:hover:border-emerald-500 dark:hover:shadow-[0_0_10px_rgba(16,185,129,0.6)] border border-transparent font-bold rounded-lg transition-all duration-200 text-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-110"
-						>
-							{new Date(post.data.pubDate).getFullYear()}
-						</a>
-					))
-				}
+	<section class="py-12 relative flex">
+		<div class="hidden lg:flex w-1/4 sticky top-32 h-screen flex-col items-center pl-8 text-primary/30">
+			<div id="sticky-year" class="text-8xl font-black font-mono split-flap opacity-50 transition-opacity duration-300">
+				2026
+			</div>
+		</div>
+		<div class="w-full lg:w-3/4 container relative timeline-container">
+			<div class="absolute left-1/2 md:left-8 top-0 bottom-0 w-1 bg-slate-200 dark:bg-slate-700 -translate-x-1/2">
+                <div id="scroll-progress-line" class="absolute top-0 left-0 w-full bg-primary-500 shadow-[0_0_15px_rgba(16,185,129,0.8)] h-0"></div>
+            </div>
+
+			<div class="flex flex-col gap-16 md:gap-24">
+				{posts.map((post, index) => (
+                    <div class={`timeline-item relative flex w-full justify-between items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'} flex-col`} data-year={new Date(post.data.pubDate).getFullYear()}>
+                        <div class="hidden md:block w-[45%]"></div>
+                        <div class="absolute left-1/2 md:left-8 w-6 h-6 rounded-full bg-primary-500 border-4 border-background z-10 -translate-x-1/2 shadow-[0_0_10px_rgba(16,185,129,0.8)] glow-node"></div>
+                        <div class="w-full md:w-[85%] pl-12 md:pl-0 md:ml-16">
+                            <Card post={post} />
+                        </div>
+                    </div>
+				))}
 			</div>
 		</div>
 	</section>
 
-	<section class="py-12">
-		<div class="container">
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{posts.map((post) => <Card post={post} />)}
-			</div>
-		</div>
-	</section>
+    <script>
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Scroll Progress Line
+            gsap.to("#scroll-progress-line", {
+                height: "100%",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".timeline-container",
+                    start: "top center",
+                    end: "bottom center",
+                    scrub: true
+                }
+            });
+
+            // Sticky Year Tracker and Node glowing
+            const timelineItems = document.querySelectorAll(".timeline-item");
+            const stickyYear = document.getElementById("sticky-year");
+
+            timelineItems.forEach((item) => {
+                const year = item.getAttribute("data-year");
+                const node = item.querySelector(".glow-node");
+
+                ScrollTrigger.create({
+                    trigger: item,
+                    start: "top center",
+                    end: "bottom center",
+                    onEnter: () => {
+                        if(stickyYear) {
+                            stickyYear.innerText = year;
+                            stickyYear.style.opacity = "1";
+                            // Split-flap effect simulation
+                            gsap.fromTo(stickyYear,
+                                { rotationX: -90, opacity: 0 },
+                                { rotationX: 0, opacity: 1, duration: 0.5, ease: "back.out(1.7)" }
+                            );
+                        }
+                        gsap.to(node, { scale: 1.5, backgroundColor: "#34d399", duration: 0.3 });
+                    },
+                    onEnterBack: () => {
+                        if(stickyYear) {
+                            stickyYear.innerText = year;
+                            stickyYear.style.opacity = "1";
+                            gsap.fromTo(stickyYear,
+                                { rotationX: 90, opacity: 0 },
+                                { rotationX: 0, opacity: 1, duration: 0.5, ease: "back.out(1.7)" }
+                            );
+                        }
+                        gsap.to(node, { scale: 1.5, backgroundColor: "#34d399", duration: 0.3 });
+                    },
+                    onLeave: () => {
+                        gsap.to(node, { scale: 1, backgroundColor: "#10b981", duration: 0.3 });
+                    },
+                    onLeaveBack: () => {
+                        gsap.to(node, { scale: 1, backgroundColor: "#10b981", duration: 0.3 });
+                    }
+                });
+            });
+        });
+    </script>
 </BaseLayout>
