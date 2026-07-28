@@ -31,7 +31,7 @@ const posts = (await getCollection("blog")).sort(
 			</div>
 		</div>
 		<div class="w-full lg:w-3/4 container relative timeline-container">
-			<div class="absolute left-1/2 md:left-8 top-0 bottom-0 w-1 bg-slate-200 dark:bg-slate-700 -translate-x-1/2">
+			<div class="absolute left-1/2 md:left-8 top-0 bottom-0 w-1 bg-slate-200/50 dark:bg-slate-700/50 -translate-x-1/2">
                 <div id="scroll-progress-line" class="absolute top-0 left-0 w-full bg-primary-500 shadow-[0_0_15px_rgba(16,185,129,0.8)] h-0"></div>
             </div>
 
@@ -55,7 +55,10 @@ const posts = (await getCollection("blog")).sort(
 
         gsap.registerPlugin(ScrollTrigger);
 
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("astro:page-load", () => {
+            // Kill existing triggers on page navigation to prevent bugs
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
             // Scroll Progress Line
             gsap.to("#scroll-progress-line", {
                 height: "100%",
@@ -82,7 +85,7 @@ const posts = (await getCollection("blog")).sort(
                     end: "bottom center",
                     onEnter: () => {
                         if(stickyYear) {
-                            stickyYear.innerText = year;
+                            stickyYear.innerText = year || "";
                             stickyYear.style.opacity = "1";
                             // Split-flap effect simulation
                             gsap.fromTo(stickyYear,
@@ -94,7 +97,7 @@ const posts = (await getCollection("blog")).sort(
                     },
                     onEnterBack: () => {
                         if(stickyYear) {
-                            stickyYear.innerText = year;
+                            stickyYear.innerText = year || "";
                             stickyYear.style.opacity = "1";
                             gsap.fromTo(stickyYear,
                                 { rotationX: 90, opacity: 0 },

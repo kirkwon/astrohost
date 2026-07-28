@@ -16,7 +16,7 @@ const { Content } = await post.render();
 ---
 
 <BaseLayout title={post.data.title}>
-  <article class="prose dark:prose-invert mx-auto py-8">
+  <article class="prose dark:prose-invert mx-auto py-8 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-2xl p-8 md:p-12 shadow-xl border border-white/20 dark:border-slate-700/30">
     <h1
       transition:name={`post-title-${post.slug}`}
       class="text-5xl font-black mb-6 bg-gradient-to-r from-primary-700 to-slate-700 dark:from-primary-400 dark:to-slate-400 bg-clip-text text-transparent"
@@ -24,12 +24,14 @@ const { Content } = await post.render();
       {post.data.title}
     </h1>
     <div
-      class="not-prose mb-8 p-4 bg-secondary rounded-lg border-l-4 border-primary"
+      class="not-prose mb-8 p-4 bg-secondary/80 backdrop-blur-sm rounded-lg border-l-4 border-primary shadow-sm"
     >
       <p class="text-lg font-semibold text-secondary-foreground">
         🗓️ Published on: {post.data.pubDate.toDateString()}
       </p>
     </div>
-    <Content />
+    <div class="prose-img:rounded-xl prose-img:shadow-lg prose-a:text-primary-600 dark:prose-a:text-primary-400 hover:prose-a:text-primary-800 dark:hover:prose-a:text-primary-300 prose-a:transition-colors">
+        <Content />
+    </div>
   </article>
 </BaseLayout>
