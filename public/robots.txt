@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://ai-history-omo7.onrender.com/sitemap-index.xml

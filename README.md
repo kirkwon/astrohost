@@ -1,6 +1,8 @@
 # A Brief History of Modern AI
 
-This project is a personal blog built with Astro.js. It provides a historical overview of major advancements in AI and machine learning from 2010 to 2024.
+This project is a personal blog built with Astro.js. It provides a historical overview of major advancements in AI and machine learning from 2010 to 2026.
+
+**Live:** https://ai-history-omo7.onrender.com · [RSS feed](https://ai-history-omo7.onrender.com/rss.xml) · [Sitemap](https://ai-history-omo7.onrender.com/sitemap-index.xml)
 
 ## 🚀 Getting Started
 
@@ -75,4 +77,7 @@ Recommendation
 * Use **nginx** for production static sites for simplicity and performance.
 * Use **`astro preview` or a Node-based server** only if you need SSR, dynamic routes, or middleware.
 
-If you'd like, I can add an alternate `Dockerfile.preview` that runs `npm run preview` inside a Node image and a `docker-compose.preview.yml` for that workflow.
+## License
+
+* **Code** (config, components, scripts, everything outside `src/content/` and `public/images/`): [GNU AGPL-3.0](LICENSE)
+* **Content** (blog posts in `src/content/blog/`, essays, and images): © 2026 Kirk. All rights reserved.

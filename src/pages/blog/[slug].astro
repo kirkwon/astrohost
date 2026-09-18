@@ -15,7 +15,12 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BaseLayout title={post.data.title}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+  publishedTime={post.data.pubDate}
+>
   <article class="prose dark:prose-invert mx-auto py-8 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-2xl p-8 md:p-12 shadow-xl border border-white/20 dark:border-slate-700/30">
     <h1
       transition:name={`post-title-${post.slug}`}

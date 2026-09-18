@@ -10,7 +10,10 @@ const posts = (await getCollection("blog")).sort(
 );
 ---
 
-<BaseLayout title="My Astro Blog">
+<BaseLayout
+	title="A Brief History of Modern AI"
+	description="A year-by-year account of the major advancements in AI and machine learning, from deep learning to the agentic era."
+>
 	<section class="py-20 relative">
 		<div class="container text-center relative z-10">
 			<TitleImageCarousel
